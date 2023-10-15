@@ -50,8 +50,11 @@ class esp32ModbusTCP {
   void onData(esp32Modbus::MBTCPOnData handler);
   void onError(esp32Modbus::MBTCPOnError handler);
   uint16_t readDiscreteInputs(uint16_t address, uint16_t numberInputs);
+  uint16_t readDiscreteInputs(uint16_t serverid, uint16_t address, uint16_t numberInputs);
   uint16_t readHoldingRegisters(uint16_t address, uint16_t numberRegisters);
+  uint16_t readHoldingRegisters(uint16_t serverid, uint16_t address, uint16_t numberRegisters);
   uint16_t readInputRegisters(uint16_t address, uint16_t numberRegisters);
+  uint16_t readInputRegisters(uint16_t serverid, uint16_t address, uint16_t numberRegisters);
 
  private:
   uint16_t _addToQueue(esp32ModbusTCPInternals::ModbusRequest* request);
