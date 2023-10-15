@@ -64,21 +64,33 @@ void esp32ModbusTCP::onError(esp32Modbus::MBTCPOnError handler) {
   _onErrorHandler = handler;
 }
 
-uint16_t esp32ModbusTCP::readDiscreteInputs(uint16_t address, uint16_t numberInputs) {
-  esp32ModbusTCPInternals::ModbusRequest* request =
-    new esp32ModbusTCPInternals::ModbusRequest02(_serverID, address, numberInputs);
+uint16_t esp32ModbusTCP::readDiscreteInputs(uint16_t address, uint16_t numberInuts) {
+  ModbusRequest* request = new ModbusRequest02(_serverID, address, numberInuts);
+  return _addToQueue(request);
+}
+
+uint16_t esp32ModbusTCP::readDiscreteInputs(uint16_t serverid, uint16_t address, uint16_t numberInuts) {
+  ModbusRequest* request = new ModbusRequest02(serverid, address, numberInuts);
   return _addToQueue(request);
 }
 
 uint16_t esp32ModbusTCP::readHoldingRegisters(uint16_t address, uint16_t numberRegisters) {
-  esp32ModbusTCPInternals::ModbusRequest* request =
-    new esp32ModbusTCPInternals::ModbusRequest03(_serverID, address, numberRegisters);
+  ModbusRequest* request = new ModbusRequest03(_serverID, address, numberRegisters);
+  return _addToQueue(request);
+}
+
+uint16_t esp32ModbusTCP::readHoldingRegisters(uint16_t serverid, uint16_t address, uint16_t numberRegisters) {
+  ModbusRequest* request = new ModbusRequest03(serverid, address, numberRegisters);
   return _addToQueue(request);
 }
 
 uint16_t esp32ModbusTCP::readInputRegisters(uint16_t address, uint16_t numberRegisters) {
-  esp32ModbusTCPInternals::ModbusRequest* request =
-    new esp32ModbusTCPInternals::ModbusRequest04(_serverID, address, numberRegisters);
+  ModbusRequest* request = new ModbusRequest04(_serverID, address, numberRegisters);
+  return _addToQueue(request);
+}
+
+uint16_t esp32ModbusTCP::readInputRegisters(uint16_t serverid, uint16_t address, uint16_t numberRegisters) {
+  ModbusRequest* request = new ModbusRequest04(serverid, address, numberRegisters);
   return _addToQueue(request);
 }
 
